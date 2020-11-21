@@ -1,0 +1,41 @@
+version: '3.1'
+
+networks:
+  hyper:
+    driver: bridge
+
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'ag.password'
+      POSTGRES_DB: 'heimdall'
+    ports:
+      -  '5432:5432'
+    networks:
+      - hyper
+      
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8001:8000'
+    networks:
+      - hyper
+
+  redis:
+    image: redis:6.0.9-alpine
+    restart: unless-stopped
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes     
+    networks:
+      - hyper
+    ports:
+      - '6379:6379'
+      
+volumes:
+  pgdata:

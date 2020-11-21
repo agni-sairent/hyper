@@ -1,0 +1,3 @@
+[submodule "heimdall"]
+	path = heimdall
+	url = git@github.com:agni-sairent/heimdall.git

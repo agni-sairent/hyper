@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/heimdall" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/hyper-friday-backend" vcs="Git" />
   </component>
 </project>

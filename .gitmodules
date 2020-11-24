@@ -2,6 +2,3 @@
 	path = heimdall
 	url = git@github.com:agni-sairent/heimdall.git
 
-[submodule "hyper-friday-backend"]
-	path = hyper-friday-backend
-	url = git@github.com:agni-sairent/hyper-friday-backend.git

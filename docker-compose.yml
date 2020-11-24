@@ -6,14 +6,14 @@ networks:
 
 services:
   db:
-    image: postgres
+    build:
+      context: postgres
     restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'ag.password'
-      POSTGRES_DB: 'heimdall'
     ports:
       -  '5432:5432'
     networks:
@@ -36,6 +36,16 @@ services:
       - hyper
     ports:
       - '6379:6379'
-      
+
+  heimdall:
+    build:
+      context: heimdall
+    restart: unless-stopped
+    networks:
+      - hyper
+    ports:
+      - '8000:8000'
+
+
 volumes:
   pgdata:

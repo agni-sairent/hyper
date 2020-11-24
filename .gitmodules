@@ -2,3 +2,6 @@
 	path = heimdall
 	url = git@github.com:agni-sairent/heimdall.git
 
+[submodule "friday"]
+	path = friday
+	url = git@github.com:agni-sairent/friday.git

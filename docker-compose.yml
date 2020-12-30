@@ -1,6 +1,11 @@
 version: '3.1'
 
 services:
+  data:
+    image: busybox
+    volumes:
+      - friday_frontend:/var/friday-frontend
+
   db:
     build:
       context: postgres
@@ -44,20 +49,33 @@ services:
 
   friday:
     build:
-      context: friday
+      context: friday-backend
     restart: unless-stopped
     networks:
       - hyper
     ports:
       - '8001:8000'
+
+  friday-build-frontend:
+    build:
+      context: friday-frontend
+    networks:
+      - hyper
+    volumes:
+      - friday_frontend:/src/build
+
   nginx:
     image: nginx:1.19.2
     volumes:
       - ./nginx/templates:/etc/nginx/templates
+      - friday_frontend:/opt/friday_frontend
     networks:
       - hyper
     environment:
       - NGINX_PORT=10875
+    depends_on:
+      - friday
+      - heimdall
     ports:
       - 10875:10875
 
@@ -68,3 +86,4 @@ networks:
 volumes:
   pgdata:
   nginx:
+  friday_frontend:

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/friday" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/friday-backend" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/friday-frontend" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/heimdall" vcs="Git" />
   </component>
 </project>

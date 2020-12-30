@@ -1,9 +1,5 @@
 version: '3.1'
 
-networks:
-  hyper:
-    driver: bridge
-
 services:
   db:
     build:
@@ -23,7 +19,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - '8001:8000'
+      - '7999:8000'
     networks:
       - hyper
 
@@ -46,6 +42,29 @@ services:
     ports:
       - '8000:8000'
 
+  friday:
+    build:
+      context: friday
+    restart: unless-stopped
+    networks:
+      - hyper
+    ports:
+      - '8001:8000'
+  nginx:
+    image: nginx:1.19.2
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates
+    networks:
+      - hyper
+    environment:
+      - NGINX_PORT=10875
+    ports:
+      - 10875:10875
+
+networks:
+  hyper:
+    driver: bridge
 
 volumes:
   pgdata:
+  nginx:

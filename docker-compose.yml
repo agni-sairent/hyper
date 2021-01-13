@@ -44,6 +44,8 @@ services:
     restart: unless-stopped
     networks:
       - hyper
+    depends_on:
+      - db
     ports:
       - '8000:8000'
 
@@ -53,6 +55,8 @@ services:
     restart: unless-stopped
     networks:
       - hyper
+    depends_on:
+      - db
     ports:
       - '8001:8000'
 
@@ -68,6 +72,8 @@ services:
     image: nginx:1.19.2
     volumes:
       - ./nginx/templates:/etc/nginx/templates
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
       - friday_frontend:/opt/friday_frontend
     networks:
       - hyper
@@ -78,6 +84,13 @@ services:
       - heimdall
     ports:
       - 10875:10875
+      - 443:443
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
 
 networks:
   hyper:

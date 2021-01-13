@@ -5,7 +5,7 @@ services:
     image: busybox
     volumes:
       - friday_frontend:/var/friday-frontend
-      - certbot_config:/var/certbot-config
+
   db:
     build:
       context: postgres
@@ -72,9 +72,9 @@ services:
     image: nginx:1.19.2
     volumes:
       - ./nginx/templates:/etc/nginx/templates
-      - ./data/certbot/www:/var/www/certbot
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
       - friday_frontend:/opt/friday_frontend
-      - certbot_config:/etc/letsencrypt
     networks:
       - hyper
     environment:
@@ -90,7 +90,7 @@ services:
     image: certbot/certbot
     volumes:
       - ./certbot/www:/var/www/certbot
-      - certbot_config:/etc/letsencrypt
+      - ./certbot/conf:/etc/letsencrypt
 
 networks:
   hyper:
